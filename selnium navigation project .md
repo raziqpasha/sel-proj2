@@ -97,4 +97,83 @@ public class LaunchingBrowser {
     }
 }
 
+//ANOTHER WAY  TO PERFORM THE CODE
+
+package section1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class LaunchingBrowser {
+
+    public static void main(String[] args) throws InterruptedException {
+        // Set up WebDriver
+        WebDriver driver = new ChromeDriver();
+
+        // Access Flipkart app
+        driver.get("https://www.flipkart.com/apple-iphone-11-white-128-gb/p/itme32df47ea6742?pid=MOBFWQ6B7KKRXDDS&lid=LSTMOBFWQ6B7KKRXDDSULUZ0N&marketplace=FLIPKART&q=iphone+11&store=tyy%2F4io&srno=s_1_1&otracker=search&otracker1=search&fm=organic&iid=c79ff4cc-462d-4479-8384-d4fab77ed59a.MOBFWQ6B7KKRXDDS.SEARCH&ppt=browse&ppn=browse&ssid=zbsry2oc000000001723708578757&qH=f6cdfdaa9f3c23f3");
+        Thread.sleep(2000); // Waiting for 2 seconds
+
+        // Maximize the window
+        driver.manage().window().maximize();
+        Thread.sleep(2000);
+
+        // Perform all actions using methods
+        clickElement(driver, "//button[@type='button']");
+        Thread.sleep(2000);
+
+        enterText(driver, "//input[@type='text']", "9742987668");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//button[@type='submit']");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//span[normalize-space()='Resend?']");
+        Thread.sleep(5000);
+
+        clickElement(driver, "//button[@type='submit']");
+        Thread.sleep(2000);
+
+        driver.navigate().back();
+        Thread.sleep(2000);
+
+        clickElement(driver, "//button[@class='QqFHMw vslbG+ In9uk2']");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//span[normalize-space()='Add Item']");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//div[normalize-space()='Save for later']");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//div[normalize-space()='Move to cart']");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//img[@class='zDmZ1J']");
+        Thread.sleep(2000);
+
+        clickElement(driver, "//div[@class='sBxzFz fF30ZI t9UCZh']");
+        Thread.sleep(5000);
+        
+        driver.navigate().to("https://www.flipkart.com/search?q=iphone%2012&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+        checkBox(driver,"/html[1]/body[1]/div[1]/div[1]/div[3]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/a[1]/div[1]/div[2]/div[1]/span[1]/label[1]/div[1]");
+
+        Thread.sleep(1000);
+        driver.quit();
+    }
+
+    // Method to click an element using XPath
+    public static void clickElement(WebDriver driver, String xpath) {
+        driver.findElement(By.xpath(xpath)).click();
+    }
+
+    // Method to enter text in an element using XPath
+    public static void enterText(WebDriver driver, String xpath, String text) {
+        driver.findElement(By.xpath(xpath)).sendKeys(text);
+    }
+    public static void checkBox(WebDriver driver,String xpath) {
+    	driver.findElement(By.xpath(xpath)).click();
+    }
+}
 

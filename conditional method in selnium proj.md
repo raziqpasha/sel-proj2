@@ -1,7 +1,7 @@
 //selenium condition method
-1.  isDisplayed()
-2.  isEnabled()
-3.  isSelected
+1.  isDisplayed()  --> EX.it is used for like login, create account buttion
+2.  isEnabled()    --> EX.it is used for like textfilrd
+3.  isSelected()   --> EX.it is used for like radio, check box buttons
 
 
 package com.Attribute;

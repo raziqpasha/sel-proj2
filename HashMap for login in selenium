@@ -1,0 +1,51 @@
+package com.Attribute;
+
+
+
+import java.awt.AWTException;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.HashMap;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class BasicDevice {
+	 
+    // Method to insert and return login data
+    public static HashMap<String, String> insert() {
+        HashMap<String, String> hm = new HashMap<>();
+        hm.put("r124", "12345678"); // r124 is the username, 12345678 is the password
+        hm.put("u09", "9888");
+        hm.put("k123", "988989");
+        return hm;
+    }
+    
+    public static void main(String[] args) throws InterruptedException, AWTException, IOException {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.get("https://www.facebook.com/");
+        
+        HashMap<String, String> login = insert();
+        for(HashMap.Entry<String, String> present:login.entrySet()) {
+        
+//        String username = login.keySet().iterator().next();  
+//        String password = login.get(username);  
+        	 String username=present.getKey();
+        			 String password=	present.getValue();	 
+        			 
+        WebElement un = driver.findElement(By.xpath("//input[@id='email']"));
+        un.clear();  // Clear the field before sending keys
+        un.sendKeys(username);  // Send the username
+        
+        WebElement ps = driver.findElement(By.xpath("//input[@id='pass']"));
+        ps.clear();  // Clear the field before sending keys
+        ps.sendKeys(password);  // Send the password
+        
+        Thread.sleep(2000);
+        }
+        driver.quit();
+    }
+}

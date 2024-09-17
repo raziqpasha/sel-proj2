@@ -1,0 +1,27 @@
+package com.Attribute;
+
+import java.awt.AWTException;
+import java.time.Duration;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.JavascriptExecutor;
+
+public class BasicDevice {
+    public static void main(String[] args) throws InterruptedException, AWTException {
+     
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://davidwalsh.name/demo/multiple-file-upload.php");
+        
+        driver.findElement(By.xpath("//input[@id='filesToUpload']")).sendKeys("C:\\Downloads\\files.pdf");
+        String find=driver.findElement(By.xpath("//ul[@id=\"fileList\"]")).getText();
+        
+        if(find.contains("RaziqPasah_AutomationQA.pdf")) {
+        	System.out.println("sucess");
+        }
+        else {
+        	System.out.println("not sucess");
+
+        }
+}
+}

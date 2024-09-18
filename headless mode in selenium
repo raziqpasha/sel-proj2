@@ -1,0 +1,46 @@
+package com.Attribute;
+
+import java.awt.AWTException;
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import com.google.common.io.Files;
+
+import org.openqa.selenium.JavascriptExecutor;
+
+public class BasicDevice {
+    public static void main(String[] args) throws InterruptedException, AWTException, IOException {
+    	
+    	//headless mode implementation
+    	//headless mode it will run in backend , it will not opend webpage
+    	ChromeOptions option=new ChromeOptions();
+   	option.addArguments("headless");
+    		
+    	
+     
+        WebDriver driver = new ChromeDriver(option);  //headless mode it will run in backend , it will not opend webpage
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://www.flipkart.com/");
+        
+        WebElement sc=driver.findElement(By.xpath("//div[@class='_1ZMrY_']"));
+        sc.getText();
+        WebElement link=driver.findElement(By.xpath("//a[@aria-label='Myntra']"));
+        if(sc.equals(link)) {
+        	System.out.println("pass");
+        }
+        else {
+        	System.out.println("fail");
+
+        }
+        
+        
+    
+    }
+}
+
+
+

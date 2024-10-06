@@ -1,0 +1,63 @@
+package com.Attribute;
+
+import java.awt.AWTException;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class BasicDevice {
+    public static void main(String[] args) throws InterruptedException, AWTException, IOException {
+        
+        // Set up the WebDriver (assuming the WebDriver path is correctly configured)
+        WebDriver driver = new ChromeDriver();
+        WebDriverWait myWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        
+        // Navigate to the Sauce Demo website
+        driver.get("https://www.saucedemo.com/");
+        
+        // Enter username and password
+        WebElement usn = driver.findElement(By.xpath("//input[@id='user-name']"));
+        usn.sendKeys("standard_user");
+        WebElement pss = driver.findElement(By.xpath("//input[@id='password']"));
+        pss.sendKeys("secret_sauce");
+        WebElement lgn = driver.findElement(By.xpath("//input[@id='login-button']"));
+        lgn.click();
+        
+        // Find all the prices on the page
+        List<WebElement> prices = driver.findElements(By.xpath("//div[@class='inventory_item_price']"));
+        
+        // Create an array to store prices as doubles
+        double[] arr = new double[prices.size()];
+        
+        // Loop through all price elements and store the parsed price in the array
+        for (int i = 0; i < arr.length; i++) {
+            String priceText = prices.get(i).getText().replace("$", "").trim(); // Remove dollar symbol and trim any whitespaces
+            arr[i] = Double.parseDouble(priceText); // Convert to double
+        }
+        
+        // Find the maximum price
+        double maxP = arr[0];
+        for (double price : arr) {
+            maxP = Math.max(maxP, price); // Find the maximum value
+        }
+        
+        // Output the highest price
+        System.out.println("Highest Price: $" + maxP);
+        
+        if(maxP==49.99) {
+        	WebElement cl=driver.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-fleece-jacket']"));
+        	cl.click();
+        	WebElement li=driver.findElement(By.xpath("//div[normalize-space()='Sauce Labs Fleece Jacket']\r\n"));
+            li.click();
+        }
+        Thread.sleep(5000);
+        // Close the browser
+        driver.quit();
+    }
+}
